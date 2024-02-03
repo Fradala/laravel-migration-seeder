@@ -5,43 +5,31 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Train;
+use Faker\Generator as Faker;
 
 class TrainSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(Faker $faker): void
     {
-        $train = [
-            [
-               "name" => 'italo',
-               "azienda" => 'italo',
-               "stazione_partenza" => 'liguria',
-               "stazione_arrivo" => 'molise',
-               "orario_partenza" => '9.30',
-               "orario_arrivo" => '11.00',
-               "codice_treno" => 'l3n5nf83n',
-               "numero_carrozza" => '5',
-               "in_orario" => true,
-               "cancellato" => false,
+       
 
-            ],
-
-        ];
-
-        foreach ($train as $newTrain){
+        for ($i=0; $i < 30; $i++){
 
             $nuovoTreno = new Train();
 
-            $nuovoTreno->name = $newTrain['name'];
-            $nuovoTreno->azienda = $newTrain['azienda'];
-            $nuovoTreno->stazione_partenza = $newTrain['stazione_partenza'];
-            $nuovoTreno->stazione_arrivo = $newTrain['stazione_arrivo'];
-            $nuovoTreno->codice_treno = $newTrain['codice_treno'];
-            $nuovoTreno->numero_carrozza = $newTrain['numero_carrozza'];
-            $nuovoTreno->in_orario = $newTrain['in_orario'];
-            $nuovoTreno->cancellato = $newTrain['cancellato'];
+            $nuovoTreno->name = $faker->name();
+            $nuovoTreno->azienda = $faker->name();
+            $nuovoTreno->stazione_partenza = $faker->name();
+            $nuovoTreno->stazione_arrivo = $faker->name();
+            $nuovoTreno->orario_partenza = $faker->date();
+            $nuovoTreno->orario_arrivo = $faker->date();
+            $nuovoTreno->codice_treno =$faker->name();
+            $nuovoTreno->numero_carrozza = $faker->word();
+            $nuovoTreno->in_orario = $faker->boolean();
+            $nuovoTreno->cancellato = $faker->boolean();
             $nuovoTreno->save();
         }
     }
